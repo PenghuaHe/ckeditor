@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>A Simple Page with CKEditor</title>
+        <!-- Make sure the path to CKEditor is correct. -->
+        <script src="ckeditor/ckeditor.js"></script>
+    </head>
+    <body>
+    <script>
+		
+	</script>
+        <form>
+            <textarea name="editor1" id="editor1" rows="10" cols="80">
+                This is my textarea to be replaced with CKEditor.
+            </textarea>
+            <script>
+                // Replace the <textarea id="editor1"> with a CKEditor
+                // instance, using default configuration.
+                CKEDITOR.replace( 'editor1' );
+            </script>
+        </form>
+        <script>
+		/*CKEDITOR.replace( 'editor1', {
+		 toolbar : 'Basic',
+		 uiColor : '#9AB8F3',
+		 customConfig : ''//避免加载外部配置文件
+		});*/
+		 var editor_data = CKEDITOR.instances.editor1.getData();//getData（）获取客户端数据
+		 console.log(editor_data);
+		</script>
+        <!--//内联编辑器，通过HTML5的contenteditable（内容可见编辑）属性，内联式编辑可直接在HTML元素上启用.假设在<div>元素可编辑，可以这样做：-->
+        <div id="editable" contenteditable="true">
+         <h1>Inline Editing in Action!</h1>
+         <p>The div element that holds this text is now editable.
+        </div>
+        <script>
+         // Turn off automatic editor creation first.
+         CKEDITOR.disableAutoInline = true;
+         CKEDITOR.inline( 'editable' );
+		 //检索编辑器数据
+		 var data = CKEDITOR.instances.editable.getData();
+		 console.log(data);
+		 //编辑器定义样式
+		CKEDITOR.stylesSet.add( 'my_styles', [
+		 // Block-level styles
+		 { name: 'Blue Title', element: 'h2', styles: { 'color': 'Blue' } },
+		 { name: 'Red Title' , element: 'h3', styles: { 'color': 'Red' } },
+		// Inline styles
+		 { name: 'CSS Style', element: 'span', attributes: { 'class': 'my_style' } },
+		 { name: 'Marker: Yellow', element: 'span', styles: { 'background-color': 'Yellow' } }
+		]);
+        </script>
+    </body>
+</html>
